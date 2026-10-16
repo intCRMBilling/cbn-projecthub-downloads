@@ -1,8 +1,8 @@
 # CBN ProjectHub user guide
 
-Applies to the **0.1.10 Windows x64 pilot**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
+Applies to the **0.1.12 internal Windows x64 release**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
 
-The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. The current release is a controlled self-signed pilot, not a general production rollout. No Mac installer is currently published.
+The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and requires approved internal certificate trust and signed login setup. No Mac installer is currently published.
 
 ## Contents
 
@@ -26,7 +26,7 @@ The installer is public; company access is not. Application source is maintained
 ## 1. Install and sign in
 
 1. Ask your operator to approve this pilot for your PC. Follow the separate Windows installation guide supplied by the operator for certificate verification and a dedicated pilot profile. Never request a private signing key or another person's app profile.
-2. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.10/CBN-ProjectHub-0.1.10-x64-nsis.exe). No GitHub account is needed. The operator must verify its hash and publisher before execution. A self-signed certificate may require explicitly approved user/IT trust; do not bypass Windows security warnings.
+2. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.12/CBN-ProjectHub-0.1.12-x64-nsis.exe). No GitHub account is needed. The operator must verify its hash and publisher before execution. A self-signed certificate may require explicitly approved user/IT trust; do not bypass Windows security warnings.
 3. The operator supplies a signed local login configuration separately through an approved internal channel. It is not in the installer or public repository. The pilot configuration is short-lived; ask the operator about renewal. A certificate by itself does not configure Microsoft login.
 4. Start the app through the pilot launcher provided by the operator. Click **Sign in with Microsoft**, complete browser sign-in/MFA yourself and return to the app. Never paste passwords, tokens or MFA codes into chat or a public issue.
 5. If browser sign-in is waiting, use the available cancellation action before retrying. Use the sign-in screen's saved-session recovery only when indicated. Missing or expired company login configuration must be replaced by the operator, followed by a restart.
@@ -38,13 +38,13 @@ After sign-in, **Settings** is available even before a workspace or database is 
 
 Project access requires the company PostgreSQL service, including when artifact files are stored locally. This release is not a fully offline project editor.
 
-1. Obtain connection details and approved TLS settings from your administrator privately. Do not copy example values from documentation or put real values in a GitHub issue.
-2. On the company database setup screen, enter the provided connection details. Use **Save database settings** and **Test database connection** as shown. Database connectivity and Microsoft authorization are separate checks; **Check Microsoft and database** checks both.
+1. Obtain connection details and the chosen transport mode from your administrator privately. New connections default to **No TLS**. This mode does not encrypt database traffic; choose it explicitly for a server without TLS. Existing saved TLS connections are preserved and never silently downgraded. Expand **Server uses TLS?** when the server supports TLS. Do not copy example values from documentation or put real values in a GitHub issue.
+2. On the company database setup screen, enter the provided connection details. Use **Test and save** to test the entered details before saving. A failed test preserves the working configuration; **Save anyway** is an explicit separate choice. The summary provides connection and recovery actions.
 3. Initialize membership only when the application explicitly requires it and the administrator authorizes it. Do not repeatedly initialize a database to fix a network or login error.
-4. Connect the approved office VPN if this database needs it. The app can offer **Open FortiClient** when appropriate; it does not install or purchase a VPN service. Do not weaken certificate verification to force a connection.
+4. Connect the approved office VPN if this database needs it. The app can offer **Open FortiClient** when appropriate; it does not install or purchase a VPN service. Use the configured transport mode; a TLS failure does not automatically switch to No TLS.
 5. With multiple database profiles, select the intended database. Project lists and the remembered project follow that selection. Switching may close the current project and can be refused while work or a review is pending. Save or resolve the pending work first.
 
-The database status indicator can be clicked to check again. Database access does not replace SharePoint/project membership. Administrator-managed service acceptance is separate from the tested installer/update pilot.
+The database status indicator can be clicked to check again. Database access does not replace SharePoint/project membership. Changing a saved connection target, username or trust may require entering its password again. Administrator-managed service acceptance is separate from installer/update verification.
 
 ## 3. Create, open and switch projects
 
@@ -185,7 +185,7 @@ Rebuild index, where offered, reconstructs artifact metadata/search from files. 
 4. Save/resolve pending work, then choose **Restart to update**. The app verifies the installer, closes safely, installs and opens again automatically. Ordinary quit does not authorize installation.
 5. Confirm the new version. If verification fails, do not manually force the rejected download to run; contact the operator with only the safe error code.
 
-The same-PC isolated 0.1.9→0.1.10 flow was tested. A second PC still needs its own approved trust/login acceptance. Local Test certificate expiry is 2027-01-13; login provisioning has a separate shorter renewal schedule. Plan renewals with the operator before expiry.
+The owner reports successful second-PC updates through 0.1.11, automatic reopening and preserved login. Each additional PC needs its own approved trust and login setup. Local Test certificate expiry is 2027-01-13; login provisioning has a separate shorter renewal schedule. Plan renewals with the operator before expiry.
 
 Release metadata (`release.json`, `latest.yml`, `.blockmap`) supports the updater and should not be deleted. Users download the EXE; the app handles metadata. GitHub's Source code archives are snapshots of this public documentation repository, not the private application repository.
 
