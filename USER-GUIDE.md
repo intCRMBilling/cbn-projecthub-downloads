@@ -1,8 +1,8 @@
 # CBN ProjectHub user guide
 
-Applies to the **0.1.13 internal Windows x64 release**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
+Applies to the **0.1.14 internal Windows x64 release**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
 
-The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and requires approved internal certificate trust and signed login setup. No Mac installer is currently published.
+The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and includes company Microsoft sign-in without a separate configuration file. Publisher trust remains required for verified updates and setup offers an explicit consent step. No Mac installer is currently published.
 
 ## Contents
 
@@ -25,12 +25,12 @@ The installer is public; company access is not. Application source is maintained
 
 ## 1. Install and sign in
 
-1. Ask your operator to prepare this PC. Follow the separate Windows installation guide for certificate verification and signed internal setup. An existing custom pilot profile needs an explicit, verified copy to the normal profile before first Start-menu use; do not merge populated profiles. Never request a private signing key or another person's app profile.
-2. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.13/CBN-ProjectHub-0.1.13-x64-nsis.exe). No GitHub account is needed. The operator must verify its hash and publisher before execution. A self-signed certificate may require explicitly approved user/IT trust; do not bypass Windows security warnings.
-3. The operator supplies a signed local login configuration separately through an approved internal channel. It is not in the installer or public repository. The signed configuration is short-lived; ask the operator about renewal. A certificate by itself does not configure Microsoft login.
-4. Start **CBN ProjectHub** from the Start menu after the operator completes setup or migration. Click **Sign in with Microsoft**, complete browser sign-in/MFA yourself and return to the app. Never paste passwords, tokens or MFA codes into chat or a public issue.
-5. If browser sign-in is waiting, use the available cancellation action before retrying. Use the sign-in screen's saved-session recovery only when indicated. Missing or expired company login configuration must be replaced by the operator, followed by a restart.
-6. Use the account menu to sign out. A restored session can require renewed online confirmation before a protected action. Downloading an installer never grants project membership or database access.
+1. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.14/CBN-ProjectHub-0.1.14-x64-nsis.exe). No GitHub account is needed. Follow the internal operator's hash/publisher verification guidance. Windows may still warn or block initial execution of a self-signed installer; do not bypass organizational policy.
+2. Run setup. If the publisher is not already trusted, setup asks permission to trust **CBN ProjectHub Local Test** for your Windows account. Review the publisher and expiry before agreeing. No private key is installed and no manual certificate-manager steps are required. If you decline or Windows blocks trust, setup reports the issue; automatic updates cannot work until trust is approved. Silent setup never adds trust automatically.
+3. Start **CBN ProjectHub** from the Start menu. Click **Sign in with Microsoft**, complete normal browser sign-in/MFA and return to the app. Version 0.1.14 and later do not need auth-provisioning.json or monthly configuration renewal. Microsoft session expiry, account policy and permissions still apply; registration changes are delivered through reviewed app updates.
+4. If browser sign-in is waiting, use Cancel before retrying. Use saved-session recovery only when indicated. Never paste passwords, tokens or MFA codes into chat or a public issue.
+5. Existing custom pilot profiles still need an explicit verified migration before ordinary Start-menu use; do not merge populated profiles. A fresh employee must use their own Microsoft login, not another person's profile. Obtain database settings privately after login.
+6. Use the account menu to sign out. A restored session may require online confirmation before a protected action. Downloading an installer never grants project membership or database access.
 
 After sign-in, **Settings** is available even before a workspace or database is ready, for application updates. Full project Settings becomes available inside an open workspace.
 
@@ -185,7 +185,7 @@ Rebuild index, where offered, reconstructs artifact metadata/search from files. 
 4. Save/resolve pending work, then choose **Restart to update**. The app verifies the installer, closes safely, installs and opens again automatically. Ordinary quit does not authorize installation.
 5. Confirm the new version. If verification fails, do not manually force the rejected download to run; contact the operator with only the safe error code.
 
-The owner reports successful second-PC updates through 0.1.11, automatic reopening and preserved login. Each additional PC needs its own approved trust and login setup. Local Test certificate expiry is 2027-01-13; login provisioning has a separate shorter renewal schedule. Plan renewals with the operator before expiry.
+The owner reports successful second-PC updates through 0.1.11, automatic reopening and preserved login. Each additional PC needs its own approved trust and login setup. The existing publisher certificate expires on 2027-01-13 and still needs a reviewed rotation before then. Version 0.1.14 removes monthly login-configuration renewal; it does not extend or rotate that publisher certificate.
 
 Release metadata (`release.json`, `latest.yml`, `.blockmap`) supports the updater and should not be deleted. Users download the EXE; the app handles metadata. GitHub's Source code archives are snapshots of this public documentation repository, not the private application repository.
 
@@ -207,7 +207,7 @@ Shortcuts depend on focus; typing in an editor can have editor-specific behavior
 
 | Symptom | Next step |
 |---|---|
-| Missing/expired login configuration | Ask the operator for a fresh signed local document; restart. Do not edit it manually. |
+| Missing/expired login configuration on an older version | Update to 0.1.14 or later using the verified installer. Older releases retain their local provisioning requirement; new releases do not use that file. |
 | Microsoft login/consent blocked | Complete the normal browser flow; involve the organization's administrator for policy/assignment issues. |
 | Database disconnected | Verify the selected profile, approved VPN, server reachability and TLS with IT. Do not guess credentials or disable validation. |
 | Wrong project's database | Review the app's switch confirmation and choose the intended database; preserve pending work first. |
