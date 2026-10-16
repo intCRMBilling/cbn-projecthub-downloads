@@ -1,6 +1,6 @@
 # CBN ProjectHub user guide
 
-Applies to the **0.1.12 internal Windows x64 release**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
+Applies to the **0.1.13 internal Windows x64 release**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
 
 The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and requires approved internal certificate trust and signed login setup. No Mac installer is currently published.
 
@@ -25,10 +25,10 @@ The installer is public; company access is not. Application source is maintained
 
 ## 1. Install and sign in
 
-1. Ask your operator to approve this pilot for your PC. Follow the separate Windows installation guide supplied by the operator for certificate verification and a dedicated pilot profile. Never request a private signing key or another person's app profile.
-2. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.12/CBN-ProjectHub-0.1.12-x64-nsis.exe). No GitHub account is needed. The operator must verify its hash and publisher before execution. A self-signed certificate may require explicitly approved user/IT trust; do not bypass Windows security warnings.
-3. The operator supplies a signed local login configuration separately through an approved internal channel. It is not in the installer or public repository. The pilot configuration is short-lived; ask the operator about renewal. A certificate by itself does not configure Microsoft login.
-4. Start the app through the pilot launcher provided by the operator. Click **Sign in with Microsoft**, complete browser sign-in/MFA yourself and return to the app. Never paste passwords, tokens or MFA codes into chat or a public issue.
+1. Ask your operator to prepare this PC. Follow the separate Windows installation guide for certificate verification and signed internal setup. An existing custom pilot profile needs an explicit, verified copy to the normal profile before first Start-menu use; do not merge populated profiles. Never request a private signing key or another person's app profile.
+2. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.13/CBN-ProjectHub-0.1.13-x64-nsis.exe). No GitHub account is needed. The operator must verify its hash and publisher before execution. A self-signed certificate may require explicitly approved user/IT trust; do not bypass Windows security warnings.
+3. The operator supplies a signed local login configuration separately through an approved internal channel. It is not in the installer or public repository. The signed configuration is short-lived; ask the operator about renewal. A certificate by itself does not configure Microsoft login.
+4. Start **CBN ProjectHub** from the Start menu after the operator completes setup or migration. Click **Sign in with Microsoft**, complete browser sign-in/MFA yourself and return to the app. Never paste passwords, tokens or MFA codes into chat or a public issue.
 5. If browser sign-in is waiting, use the available cancellation action before retrying. Use the sign-in screen's saved-session recovery only when indicated. Missing or expired company login configuration must be replaced by the operator, followed by a restart.
 6. Use the account menu to sign out. A restored session can require renewed online confirmation before a protected action. Downloading an installer never grants project membership or database access.
 
