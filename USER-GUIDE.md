@@ -1,6 +1,6 @@
 # CBN ProjectHub user guide
 
-Applies to the **0.1.14 internal Windows x64 release**, reviewed 2026-10-16. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
+Applies to the **0.1.15 internal Windows x64 release**, reviewed 2026-10-18. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
 
 The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and includes company Microsoft sign-in without a separate configuration file. Publisher trust remains required for verified updates and setup offers an explicit consent step. No Mac installer is currently published.
 
@@ -71,17 +71,17 @@ Module relationships describe dependencies or related areas. When AI proposes re
 
 Open the intended module and use its new-artifact action. Select a type, give it a clear title/slug and review the starting template. The supported types are:
 
-| Type | Purpose |
-|---|---|
-| MB | Module brief |
-| PC | Project charter |
-| PRD | Product requirements document |
-| DSN | Design |
-| TC | Test cases |
-| BPMN | BPMN process model |
-| BPF | Business process flow |
+| Type | Purpose                         |
+| ---- | ------------------------------- |
+| MB   | Module brief                    |
+| PC   | Project charter                 |
+| PRD  | Product requirements document   |
+| DSN  | Design                          |
+| TC   | Test cases                      |
+| BPMN | BPMN process model              |
+| BPF  | Business process flow           |
 | SPEC | Story/development specification |
-| OTH | Other supporting artifact |
+| OTH  | Other supporting artifact       |
 
 Edit drafts in the appropriate editor. Markdown supports editing and preview; supported preview cells can be edited in place. **Ctrl+S** saves the current draft, and editors also perform their supported autosave. Check the save/error state before switching, closing or sharing. Preview is a rendering of the artifact, not a separate published copy.
 
@@ -163,17 +163,31 @@ Open an artifact's checks/details area to inspect completeness findings. Re-chec
 
 Use audit/batch plans to review the selected scope before starting AI work. Inspect progress, failures and resulting drafts. A score is explained by the applicable rules and evidence; it is not a certification or automatic permission to publish. Review relationship gaps and stale-source findings alongside content quality.
 
+### Code repositories and code audits
+
+Code audits are available from 0.1.15. Shared permissions, finding status and reference freshness need the four code-audit tables and grants described in the internal PostgreSQL readiness guide. Until an administrator prepares them, the app explains which shared features are unavailable. Local automated acceptance does not replace testing with your company's repositories, installed AI providers and a second member.
+
+A code audit reads one module's frontend or backend code and files a report of findings, each with its reason, impact and recommendation, for the developers to follow up. CBN ProjectHub never changes, runs, builds or tests the code, never pulls, checks out, commits or pushes, and never fixes anything itself.
+
+1. **Register the repositories.** Open **Code** in the side bar. With **Manage code repositories**, add the project's one frontend repository and each backend repository (its GitLab URL, without a password, and its default branch or tag); a backend repository lists the modules it serves. In **Modules**, give each module's frontend and backend folders, the shared code the audit may read for context, extra exclusions, or mark a side Not applicable. The **YAML** view shows the same mapping, and **History** shows who changed what. When someone else saved the mapping while you were changing it, your save is refused and the newer version is shown; in the YAML view your text stays below it to copy from. **Repositories** also shows each repository's open findings, from the newest audit of each module; a finding in shared code counts once.
+2. **Choose this laptop's checkout.** Each person clones the repositories with their own git and chooses the clone's top folder in **Code → Repositories** (**Choose folder**). CBN ProjectHub checks that a remote of the folder is the registered repository and shows **Matches (origin)**; until you choose one it shows **Not set on this laptop**. Git 2.31 or later is needed; when it is not found, **Choose git…** on the Code page or **Settings → Account** lets you choose `git.exe`. A partial ("blobless") clone is read only as far as it has the files; CBN ProjectHub never downloads missing ones.
+3. **Designate a code auditor.** Running audits is for designated code auditors by default. In **Settings → Roles & workflow → Code audit**, those who may manage roles choose the auditors and who holds each of the four permissions; in a local project you can designate yourself. An auditor who has left the project is shown so you can untick them.
+4. **Audit.** On the module page, **Audit code** opens a preview: the sides, the branch, tag or commit (or your working folder with uncommitted changes), whether to fetch first, and then exactly what will be read — the commit, the files in scope and shared, which files were left out and why, and the playbook. When the fetch fails, the preview says why and when this laptop last fetched the branch. Files that hold secrets by their name (such as `.env` or private keys) are never read, and secret values in other files are removed before anything is sent. The preview says that the listed files go to your own signed-in AI account. **Start audit** runs it. **Stop** (on the module page or the Audit page) ends it: a stopped run files no report, unless the AI had already filed one, which is then linked. If the AI fails early after valid findings, CBN ProjectHub files a partial report so they are not lost; **Retry** runs the failed or stopped sides again. In working-folder mode the report says whether your files changed while the audit ran.
+5. **Follow up.** The report is an AI draft in the module, and it is never edited — not by the AI and not by hand; a new audit gives a new report. Its **Findings** tab shows whether the report is still current (the code, and the playbook and mapping, separately), filters, each finding with its GitLab links and "also affects" for shared code, and the conversation when the audit ran on your laptop under your account. A finding whose citation could not be checked is shown as **Cannot verify**, never as proven. With **Change finding status**, mark a finding Fixed, False positive or Accepted risk with a reason; a later audit keeps the status of the same finding and shows Reopened when a fixed one is found again.
+
+Code-audit playbooks are listed separately in **Settings → Playbooks & templates**; changing them (also restoring or resetting from **History**) needs **Edit code-audit playbooks**, and their operating rules cannot be edited away. A playbook edited while an audit runs takes effect from the next audit.
+
 ## 13. Settings reference
 
-| Section | What to do there |
-|---|---|
-| Account | Inspect the signed-in identity and author attribution; sign out from the account menu. |
-| AI assistance | Configure/detect provider tools, connection/model preferences and external-client MCP setup. |
+| Section               | What to do there                                                                                                                                                                                                                                                                                   |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account               | Inspect the signed-in identity and author attribution, select git for code audits, and sign out from the account menu.                                                                                                                                                                             |
+| AI assistance         | Configure/detect provider tools, connection/model preferences and external-client MCP setup.                                                                                                                                                                                                       |
 | Playbooks & templates | Review/edit permitted playbooks, new-artifact templates, completeness and project coverage/link rules, design-system inputs, spec house rules and field-length rules. Preview imports and use history/reset deliberately. Project templates take precedence over workspace, then bundled defaults. |
-| Roles & workflow | Read effective permission rules; authorized shared-project role managers can edit the policy. |
-| Databases | Manage the account's local connection profiles and choose the active database. Keep real settings private. |
-| Workspace | Inspect the workspace location/storage information and close the project. |
-| About CBN ProjectHub | Check version/schema information and application update controls. |
+| Roles & workflow      | Read effective permission rules; authorized shared-project role managers can edit the policy, designate code auditors and configure the four code-audit permissions.                                                                                                                               |
+| Databases             | Manage the account's local connection profiles and choose the active database. Keep real settings private.                                                                                                                                                                                         |
+| Workspace             | Inspect the workspace location/storage information and close the project.                                                                                                                                                                                                                          |
+| About CBN ProjectHub  | Check version/schema information and application update controls.                                                                                                                                                                                                                                  |
 
 Rebuild index, where offered, reconstructs artifact metadata/search from files. It is not a backup restore and does not grant/change project membership. Backups must include the actual approved workspace files/assets and use the organization's database backup procedures separately.
 
@@ -191,32 +205,32 @@ Release metadata (`release.json`, `latest.yml`, `.blockmap`) supports the update
 
 ## 15. Keyboard shortcuts
 
-| Keys | Action |
-|---|---|
-| Ctrl+K | Search/jump to a module, artifact, page or action |
-| Ctrl+B | Show/hide navigation |
-| Ctrl+Shift+B | Show/hide artifact details |
-| Ctrl+S | Save the current draft |
-| Ctrl+Enter | Send the AI chat message |
-| ? | Show keyboard shortcuts |
-| Esc | Close dialog/menu/quick search or leave Focus |
+| Keys         | Action                                            |
+| ------------ | ------------------------------------------------- |
+| Ctrl+K       | Search/jump to a module, artifact, page or action |
+| Ctrl+B       | Show/hide navigation                              |
+| Ctrl+Shift+B | Show/hide artifact details                        |
+| Ctrl+S       | Save the current draft                            |
+| Ctrl+Enter   | Send the AI chat message                          |
+| ?            | Show keyboard shortcuts                           |
+| Esc          | Close dialog/menu/quick search or leave Focus     |
 
 Shortcuts depend on focus; typing in an editor can have editor-specific behavior. The current public package is Windows-only.
 
 ## 16. Recovery and troubleshooting
 
-| Symptom | Next step |
-|---|---|
+| Symptom                                                 | Next step                                                                                                                                              |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Missing/expired login configuration on an older version | Update to 0.1.14 or later using the verified installer. Older releases retain their local provisioning requirement; new releases do not use that file. |
-| Microsoft login/consent blocked | Complete the normal browser flow; involve the organization's administrator for policy/assignment issues. |
-| Database disconnected | Verify the selected profile, approved VPN, server reachability and TLS with IT. Do not guess credentials or disable validation. |
-| Wrong project's database | Review the app's switch confirmation and choose the intended database; preserve pending work first. |
-| Editing paused after connection loss | Keep the editor open, restore access and refresh/retry. Do not assume unsaved text is committed. |
-| SharePoint conflict/first sync | Wait for the first pass or review the conflict; avoid manual cache edits. |
-| Corrupt settings or legacy state | Follow the explicit recovery instructions. Archive/reset only after reviewing the effect; retain recovery material privately. |
-| Search/index out of date | Save/check the underlying files, then use the supported rebuild action. Rebuild is not a substitute for restoring missing files. |
-| AI unavailable | Check tool installation, provider sign-in, selected model and quota; use approved local diagnostics. |
-| Export unavailable | Ask the operator to verify the required local exporter; no external upload is needed. |
-| Update integrity/trust failure | Stop; report the safe error code, version and expected publisher to the operator. Never bypass security warnings. |
+| Microsoft login/consent blocked                         | Complete the normal browser flow; involve the organization's administrator for policy/assignment issues.                                               |
+| Database disconnected                                   | Verify the selected profile, approved VPN, server reachability and TLS with IT. Do not guess credentials or disable validation.                        |
+| Wrong project's database                                | Review the app's switch confirmation and choose the intended database; preserve pending work first.                                                    |
+| Editing paused after connection loss                    | Keep the editor open, restore access and refresh/retry. Do not assume unsaved text is committed.                                                       |
+| SharePoint conflict/first sync                          | Wait for the first pass or review the conflict; avoid manual cache edits.                                                                              |
+| Corrupt settings or legacy state                        | Follow the explicit recovery instructions. Archive/reset only after reviewing the effect; retain recovery material privately.                          |
+| Search/index out of date                                | Save/check the underlying files, then use the supported rebuild action. Rebuild is not a substitute for restoring missing files.                       |
+| AI unavailable                                          | Check tool installation, provider sign-in, selected model and quota; use approved local diagnostics.                                                   |
+| Export unavailable                                      | Ask the operator to verify the required local exporter; no external upload is needed.                                                                  |
+| Update integrity/trust failure                          | Stop; report the safe error code, version and expected publisher to the operator. Never bypass security warnings.                                      |
 
 For support, share only a sanitized description, application version and safe error codes through the approved internal channel. Do not post company documents, screenshots with account/connection details, full profiles, signed company provisioning or raw logs to this public repository.
