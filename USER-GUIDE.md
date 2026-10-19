@@ -1,6 +1,6 @@
 # CBN ProjectHub user guide
 
-Applies to the **0.1.15 internal Windows x64 release**, reviewed 2026-10-18. This guide covers the user-facing feature areas present in that release. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
+Applies to **CBN ProjectHub 0.1.17 for Windows x64**. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
 
 The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and includes company Microsoft sign-in without a separate configuration file. Publisher trust remains required for verified updates and setup offers an explicit consent step. No Mac installer is currently published.
 
@@ -25,7 +25,7 @@ The installer is public; company access is not. Application source is maintained
 
 ## 1. Install and sign in
 
-1. Download the [Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.14/CBN-ProjectHub-0.1.14-x64-nsis.exe). No GitHub account is needed. Follow the internal operator's hash/publisher verification guidance. Windows may still warn or block initial execution of a self-signed installer; do not bypass organizational policy.
+1. Download the installer from the [latest Windows release](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/latest). No GitHub account is needed. Follow the internal operator's hash/publisher verification guidance. Windows may still warn or block initial execution of a self-signed installer; do not bypass organizational policy.
 2. Run setup. If the publisher is not already trusted, setup asks permission to trust **CBN ProjectHub Local Test** for your Windows account. Review the publisher and expiry before agreeing. No private key is installed and no manual certificate-manager steps are required. If you decline or Windows blocks trust, setup reports the issue; automatic updates cannot work until trust is approved. Silent setup never adds trust automatically.
 3. Start **CBN ProjectHub** from the Start menu. Click **Sign in with Microsoft**, complete normal browser sign-in/MFA and return to the app. Version 0.1.14 and later do not need auth-provisioning.json or monthly configuration renewal. Microsoft session expiry, account policy and permissions still apply; registration changes are delivered through reviewed app updates.
 4. If browser sign-in is waiting, use Cancel before retrying. Use saved-session recovery only when indicated. Never paste passwords, tokens or MFA codes into chat or a public issue.
@@ -58,6 +58,19 @@ Each project workspace contains its modules and artifact files. Use the project 
 Keep project folders in the approved storage location. Do not copy application profiles or encrypted account settings between PCs. Use the application's SharePoint synchronization for managed projects instead of manually treating its cache as a shared folder.
 
 ## 4. Navigate and organize modules
+
+### Pin modules
+
+Hover or keyboard-focus a module row to show its **Pin** button. Pinned modules stay at the top,
+in pin order, including inactive modules. Click the filled pin to unpin. The module page also
+offers **More → Pin to the top of Modules / Unpin from the top of Modules**. The collapsed rail
+keeps the same order and identifies pinned modules in its tooltip.
+
+The five recent active modules and **View all modules** exclude pins; a selected module remains
+visible. Pins belong to your signed-in Microsoft account on this computer and survive restarts,
+but do not synchronize across computers. Up to 50 modules per account and 20 accounts are kept.
+Pins from other projects still occupy slots. Unpin one when the list is full. A save failure is
+reported explicitly; the failed change is not shown as saved.
 
 1. Open the project overview to see modules, artifact counts and progress information.
 2. Create modules for areas of the project, then open a module to add and browse artifacts. Use the available module actions to organize hierarchy, rename or maintain relationships. Review deletion confirmations and their scope before proceeding.
@@ -136,7 +149,7 @@ Files attached only to an AI conversation are separate from project knowledge. P
 
 Open **Team** for project participants and roles. Available roles include Steering Chair, System Analyst, Product Owner, Business Sponsor, Advisor, Project Manager, Business Analyst, Developer, Quality Assurance, Designer and Stakeholder. A person may hold multiple roles; effective permissions follow workflow policy.
 
-For a shared project, authorized members send invitations from the open project. Review recipient and roles before sending. The recipient signs in with the intended account and accepts the pending invitation from the invitation interface. An authorized inviter can revoke a pending invitation. Do not assume installing the app or receiving an email automatically grants membership. Email delivery can depend on the configured Microsoft permissions; inspect the invitation state.
+For a shared project, authorized members create invitations from the open project. Review the recipient and roles before creating one. The app renews project access first, so an expired access check does not require a preliminary sync; a failed renewal still prevents the invitation. A registered colleague accepts a pending invitation from the invitation interface. An email invitation is matched when its recipient signs in with that email address. The app does not send an email: share any displayed guest-onboarding link yourself. An authorized inviter can revoke a pending invitation. Installing the app alone does not grant project membership; inspect the invitation state.
 
 SharePoint projects synchronize saved changes and receive colleague changes automatically when authenticated/connected. Use the sync status and explicit sync controls when available. The first synchronization can hold editing; ongoing edits or AI operations can defer a synchronization pass. Resolve conflicts explicitly before continuing. Signing out stops automatic synchronization.
 
