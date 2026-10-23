@@ -1,6 +1,6 @@
 # CBN ProjectHub user guide
 
-Applies to **CBN ProjectHub 0.1.18 for Windows x64**. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
+Applies to **CBN ProjectHub 0.1.23 for Windows x64**. Features needing company services or an AI provider are conditional on those services being configured and on your permissions. Screens may differ in later releases.
 
 The installer is public; company access is not. Application source is maintained separately in a private repository. This guide contains no company connection settings, account identifiers, private keys or operational examples. This release retains the existing installation identity for update compatibility and includes company Microsoft sign-in without a separate configuration file. Publisher trust remains required for verified updates and setup offers an explicit consent step. No Mac installer is currently published.
 
@@ -236,6 +236,10 @@ The owner reports successful second-PC updates through 0.1.11, automatic reopeni
 Release metadata (`release.json`, `latest.yml`, `.blockmap`) supports the updater and should not be deleted. Users download the EXE; the app handles metadata. GitHub's Source code archives are snapshots of this public documentation repository, not the private application repository.
 
 ## 15. Keyboard shortcuts
+
+Action menus stay inside the window and may open above their button when space below is limited.
+Use Up/Down or Home/End to choose an action, Enter to activate it, and Esc or Tab to close the menu.
+Delete still asks for confirmation before moving an artifact to Trash.
 
 | Keys         | Action                                            |
 | ------------ | ------------------------------------------------- |
