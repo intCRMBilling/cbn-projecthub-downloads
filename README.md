@@ -2,7 +2,7 @@
 
 [Download the latest Windows installer](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/latest) · [User guide](USER-GUIDE.md) · [Panduan Pengguna (PDF, Bahasa Indonesia)](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases/download/v0.1.18/CBN-ProjectHub-0.1.18-Panduan-Pengguna-r2.pdf) · [All releases](https://github.com/intCRMBilling/cbn-projecthub-downloads/releases)
 
-The current release is 0.1.25. Install it, approve publisher trust if setup requests it, then sign in with Microsoft. Installed copies from 0.1.14 onward update from **Settings → About CBN ProjectHub**. No separate login-configuration file or monthly configuration renewal is required. Initial Windows warnings/policies still apply; never bypass organizational security policy. Existing custom pilot profiles require explicit migration before normal Start-menu use. Database access and project permissions remain separate company-controlled setup.
+The current release is 0.1.26. Install it, approve publisher trust if setup requests it, then sign in with Microsoft. Installed copies from 0.1.14 onward update from **Settings → About CBN ProjectHub**. No separate login-configuration file or monthly configuration renewal is required. Initial Windows warnings/policies still apply; never bypass organizational security policy. Existing custom pilot profiles require explicit migration before normal Start-menu use. Database access and project permissions remain separate company-controlled setup.
 
 This release is for internal Windows x64 use. Source is maintained in a private repository. Only the owner-approved public Microsoft tenant/client identifiers are bundled for login; no credentials, private keys, database settings or company documents are included. No Mac installer is published.
 
@@ -17,3 +17,5 @@ Version 0.1.23 fixes clipped action menus so Delete stays reachable, with scroll
 Version 0.1.24 adds "Use SharePoint copy for all" for sync conflicts, embeds only project images in Word exports, serves Open in browser previews from this computer only with a strict content policy, refuses plain http Git remotes unless allowed, lets role managers govern shared project settings, and includes other hardening.
 
 Version 0.1.25 improves stopped code audits: Continue picks the audit up with the same AI, Audit again starts over, and a new Cancel button closes the result without auditing again. Parallel audits now check the AI account once per batch, which fixes the "Claude Code is already running" error when both sides of a module were audited together.
+
+Version 0.1.26 makes setup always install CBN ProjectHub for your own Windows account, in your user folder (`%LOCALAPPDATA%\Programs\CBN-ProjectHub`), without asking where to install or who to install it for. Choosing C:\Program Files used to fail with "Error opening file for writing"; that choice is no longer offered.
